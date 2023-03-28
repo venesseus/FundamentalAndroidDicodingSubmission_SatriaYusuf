@@ -12,9 +12,7 @@ import com.example.githubuserfinder.data.database.User
 import com.example.githubuserfinder.data.model.UserResponse
 import com.example.githubuserfinder.databinding.ItemUsersBinding
 
-class MainAdapter(private val userList: List<UserResponse>) :
-    ListAdapter<User, MainAdapter.ViewHolder>(
-        DIFF_CALLBACK
+class MainAdapter(private val userList: List<UserResponse>) : ListAdapter<User, MainAdapter.ViewHolder>(DIFF_CALLBACK
     ) {
 
 

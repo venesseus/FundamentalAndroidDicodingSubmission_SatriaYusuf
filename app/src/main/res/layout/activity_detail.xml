@@ -8,7 +8,9 @@
 
     <ImageView
         android:id="@+id/iv_detail_image"
-        style="@style/templateLayout2"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:scaleType="fitXY"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.500"
@@ -16,6 +18,17 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.060"
         tools:srcCompat="@tools:sample/avatars" />
+
+    <ImageView
+        android:id="@+id/iv_favorite"
+        style="@style/templateLayout2"
+        app:layout_constraintBottom_toBottomOf="@+id/iv_detail_image"
+        app:layout_constraintEnd_toEndOf="@+id/iv_detail_image"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/iv_detail_image"
+        app:layout_constraintTop_toTopOf="@+id/iv_detail_image"
+        app:layout_constraintVertical_bias="0.0"
+        app:srcCompat="@drawable/ic_draw_bookmark" />
 
     <TextView
         android:id="@+id/tv_detail_name"
@@ -52,14 +65,12 @@
         <TextView
             style="@style/TVLayout1"
             android:text="@string/following_text"
-            android:textColor="@color/LighterPurple"
             android:textStyle="bold" />
 
         <TextView
             android:id="@+id/tv_detail_following"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textColor="@color/LighterPurple"
+            style="@style/TVLayout1"
+            android:layout_marginEnd="10dp"
             tools:text="10" />
     </TableRow>
 
@@ -73,13 +84,12 @@
         <TextView
             style="@style/TVLayout1"
             android:text="@string/repository_text"
-            android:textColor="@color/LighterPurple"
             android:textStyle="bold" />
 
         <TextView
             android:id="@+id/tv_detail_repository"
-            style="@style/templateLayout1"
-            android:textColor="@color/LighterPurple"
+            style="@style/TVLayout1"
+            android:layout_marginEnd="10dp"
             tools:text="10" />
     </TableRow>
 
@@ -94,26 +104,14 @@
         <TextView
             style="@style/TVLayout1"
             android:text="@string/followers_text"
-            android:textColor="@color/LighterPurple"
-            android:textSize="15sp"
             android:textStyle="bold" />
 
         <TextView
             android:id="@+id/tv_detail_followers"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textColor="@color/LighterPurple"
-            tools:text="0" />
+            style="@style/TVLayout1"
+            android:layout_marginEnd="10dp"
+            tools:text="10" />
     </TableRow>
-
-    <Button
-        android:id="@+id/btn_favorite"
-        style="@style/templateLayout2"
-        android:text="@string/add_favorite"
-        app:layout_constraintEnd_toEndOf="@+id/table_row_repo"
-        app:layout_constraintStart_toStartOf="@+id/table_row_follower"
-        app:layout_constraintTop_toBottomOf="@+id/table_row_following"
-        app:srcCompat="@drawable/ic_draw_favorite_border" />
 
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/tabs"
@@ -121,7 +119,7 @@
         android:background="?attr/colorPrimary"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btn_favorite"
+        app:layout_constraintTop_toBottomOf="@+id/table_row_following"
         app:tabTextColor="?attr/colorSecondary"
         app:tabIndicatorColor="?attr/colorSecondary"/>
 

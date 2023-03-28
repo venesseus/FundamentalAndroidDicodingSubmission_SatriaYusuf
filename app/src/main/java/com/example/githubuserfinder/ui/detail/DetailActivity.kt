@@ -20,15 +20,6 @@ import com.google.android.material.tabs.TabLayoutMediator
 
 class DetailActivity : AppCompatActivity() {
 
-    companion object {
-        const val EXTRA_FAVORITE = "extra_favorite"
-        @StringRes
-        val GIT_TABS = intArrayOf(
-            R.string.tabs_text_1,
-            R.string.tabs_text_2
-        )
-    }
-
     private var _binding: ActivityDetailBinding? = null
     private val binding get() = _binding
     private lateinit var viewModel: DetailViewModel
@@ -75,19 +66,19 @@ class DetailActivity : AppCompatActivity() {
                     for (data in userFavorite) {
                         if (detailList.id == data.id) {
                             addFavorite = true
-                            binding?.btnFavorite?.visibility = View.VISIBLE // Kalo layoutnya ilang atau ancur coba ubah ke variabel yang lain
+                            binding?.ivFavorite?.setImageResource(R.drawable.ic_draw_bookmark)
                         }
                     }
                 }
             }
-            binding?.btnFavorite?.setOnClickListener{
+            binding?.ivFavorite?.setOnClickListener{
                 if(addFavorite){
                     addFavorite = true
-                    binding!!.btnFavorite.visibility = View.VISIBLE // Ini juga
+                    binding!!.ivFavorite.setImageResource(R.drawable.ic_draw_bookmarked)
                     insertToDatabase(detailUser)
                 } else {
                     addFavorite = false
-                    binding!!.btnFavorite.visibility = View.VISIBLE // Ini pun juga
+                    binding!!.ivFavorite.setImageResource(R.drawable.ic_draw_bookmark)
                     viewModel.delete(detailUser.id)
                     Toast.makeText(this, "Delete User", Toast.LENGTH_SHORT).show()
                 }
@@ -97,8 +88,8 @@ class DetailActivity : AppCompatActivity() {
             val viewPager: ViewPager2 = findViewById(R.id.view_pager)
             viewPager.adapter = sectionPagerAdapter
             val tabs: TabLayout = findViewById(R.id.tabs)
-            TabLayoutMediator(tabs, viewPager) { tabs, position ->
-                tabs.text = resources.getString(GIT_TABS[position])
+            TabLayoutMediator(tabs, viewPager) { detailTabs, position ->
+                detailTabs.text = resources.getString(GIT_TABS[position])
             }.attach()
         }
 
@@ -129,5 +120,14 @@ class DetailActivity : AppCompatActivity() {
 
     private fun showLoading(isLoading: Boolean){
         binding?.detailProgressBar?.visibility = if (isLoading) View.VISIBLE else View.GONE
+    }
+
+    companion object {
+        const val EXTRA_FAVORITE = "extra_favorite"
+        @StringRes
+        val GIT_TABS = intArrayOf(
+            R.string.tabs_text_1,
+            R.string.tabs_text_2
+        )
     }
 }

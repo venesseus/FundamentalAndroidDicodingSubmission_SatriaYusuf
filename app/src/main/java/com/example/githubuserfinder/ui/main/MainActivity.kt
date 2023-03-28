@@ -68,12 +68,12 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun showRecyclerList(gitUserList: List<UserResponse>) {
+    private fun showRecyclerList(gitUserList: List<UserResponse> ) {
         rvList.layoutManager = LinearLayoutManager(this)
         val searchUserAdapter = MainAdapter(gitUserList)
         rvList.adapter = searchUserAdapter
 
-        searchUserAdapter.setOnItemClickCallback(object : MainAdapter.OnItemClickCallback {
+        searchUserAdapter.setOnItemClickCallback(object : MainAdapter.OnItemClickCallback{
             override fun onItemClicked(data: UserResponse) {
                 val intentDetail = Intent(this@MainActivity, DetailActivity::class.java)
                 intentDetail.putExtra(EXTRA_DATA, data)

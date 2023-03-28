@@ -62,20 +62,20 @@ class FavoriteDetail : AppCompatActivity() {
                     for (data in userFavorite) {
                         if (detailList.id == data.id) {
                             ivFavorite = true
-                            binding?.btnFavorite?.visibility = View.VISIBLE // Kalo layoutnya ilang atau ancur coba ubah ke variabel yang lain
+                            binding?.ivFavorite?.setImageResource(R.drawable.ic_draw_bookmark)
                         }
                     }
                 }
             }
 
-            binding?.btnFavorite?.setOnClickListener {
+            binding?.ivFavorite?.setOnClickListener {
                 if (ivFavorite) {
                     ivFavorite = true
-                    binding!!.btnFavorite.visibility = View.VISIBLE // Ini juga
+                    binding!!.ivFavorite.setImageResource(R.drawable.ic_draw_bookmark)
                     insertToDatabase(detailUser)
                 } else {
                     ivFavorite = false
-                    binding!!.btnFavorite.visibility = View.VISIBLE // Ini pun juga
+                    binding!!.ivFavorite.setImageResource(R.drawable.ic_draw_bookmark)
                     viewModel.delete(detailUser.id)
                     Toast.makeText(this, "Delete Favorite", Toast.LENGTH_SHORT).show()
                 }
