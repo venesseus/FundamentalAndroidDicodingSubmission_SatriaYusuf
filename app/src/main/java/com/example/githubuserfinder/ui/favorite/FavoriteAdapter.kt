@@ -8,9 +8,8 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.example.githubuserfinder.data.database.User
-import com.example.githubuserfinder.data.util.DiffCallback
+import com.example.githubuserfinder.data.util.UserDiffCallback
 import com.example.githubuserfinder.databinding.ItemUsersBinding
 import com.example.githubuserfinder.ui.detail.DetailActivity
 
@@ -19,7 +18,7 @@ class FavoriteAdapter : ListAdapter<User, FavoriteAdapter.FavoriteViewHolder>(DI
     private val userFavorite = ArrayList<User>()
 
     fun setFavorite(userFav : List<User>){
-        val diffCallback = DiffCallback(this.userFavorite, userFav)
+        val diffCallback = UserDiffCallback(this.userFavorite, userFav)
         val diffResult = DiffUtil.calculateDiff(diffCallback)
         this.userFavorite.clear()
         this.userFavorite.addAll(userFav)
@@ -32,8 +31,8 @@ class FavoriteAdapter : ListAdapter<User, FavoriteAdapter.FavoriteViewHolder>(DI
     }
 
     override fun onBindViewHolder(holder: FavoriteViewHolder, position: Int) {
-        val userHolder = userFavorite[position]
-        holder.bind(userHolder)
+        val favorites = userFavorite[position]
+        holder.bind(favorites)
     }
 
     class FavoriteViewHolder(val binding : ItemUsersBinding) : RecyclerView.ViewHolder(binding.root) {
@@ -49,7 +48,6 @@ class FavoriteAdapter : ListAdapter<User, FavoriteAdapter.FavoriteViewHolder>(DI
             }
             Glide.with(itemView.context)
                 .load(userFav.imageUrl)
-                .transition(DrawableTransitionOptions.withCrossFade())
                 .centerCrop()
                 .circleCrop()
                 .into(binding.ciAvatar) //Coba cek apa butuh layout item_row tambahan atau engga

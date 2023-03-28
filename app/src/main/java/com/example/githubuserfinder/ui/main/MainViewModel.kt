@@ -10,7 +10,6 @@ import retrofit2.Callback
 import retrofit2.Response
 
 class MainViewModel: ViewModel() {
-
     private val _isLoading = MutableLiveData<Boolean>()
     private val _listUser = MutableLiveData<List<UserResponse>>()
     private val _error = MutableLiveData<Boolean>()

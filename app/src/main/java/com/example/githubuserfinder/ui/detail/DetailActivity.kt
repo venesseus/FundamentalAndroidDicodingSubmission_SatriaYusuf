@@ -13,7 +13,6 @@ import com.example.githubuserfinder.data.database.User
 import com.example.githubuserfinder.data.model.DetailUserResponse
 import com.example.githubuserfinder.data.model.UserResponse
 import com.example.githubuserfinder.databinding.ActivityDetailBinding
-import com.example.githubuserfinder.ui.favorite.FavoriteViewModel
 import com.example.githubuserfinder.ui.main.MainActivity
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
@@ -24,7 +23,7 @@ class DetailActivity : AppCompatActivity() {
     private val binding get() = _binding
     private lateinit var viewModel: DetailViewModel
 
-    private var addFavorite: Boolean = false
+    private var ivFavorite: Boolean = false
     private var favoriteUser: User? = null
     private var detailUser = UserResponse()
 
@@ -65,22 +64,22 @@ class DetailActivity : AppCompatActivity() {
                 if (userFavorite != null) {
                     for (data in userFavorite) {
                         if (detailList.id == data.id) {
-                            addFavorite = true
-                            binding?.ivFavorite?.setImageResource(R.drawable.ic_draw_bookmark)
+                            ivFavorite = true
+                            binding?.ivFavorite?.setImageResource(R.drawable.ic_draw_bookmarked)
                         }
                     }
                 }
             }
             binding?.ivFavorite?.setOnClickListener{
-                if(addFavorite){
-                    addFavorite = true
+                if(ivFavorite){
+                    ivFavorite = true
                     binding!!.ivFavorite.setImageResource(R.drawable.ic_draw_bookmarked)
                     insertToDatabase(detailUser)
                 } else {
-                    addFavorite = false
+                    ivFavorite = false
                     binding!!.ivFavorite.setImageResource(R.drawable.ic_draw_bookmark)
                     viewModel.delete(detailUser.id)
-                    Toast.makeText(this, "Delete User", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this, "Bookmark Deleted", Toast.LENGTH_SHORT).show()
                 }
             }
 

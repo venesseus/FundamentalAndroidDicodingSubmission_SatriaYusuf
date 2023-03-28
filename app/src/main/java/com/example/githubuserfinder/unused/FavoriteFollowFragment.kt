@@ -1,4 +1,4 @@
-package com.example.githubuserfinder.ui.favorite
+package com.example.githubuserfinder.unused
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -12,9 +12,7 @@ import com.example.githubuserfinder.data.model.UserResponse
 import com.example.githubuserfinder.databinding.FollowFragmentBinding
 import com.example.githubuserfinder.ui.detail.DetailActivity
 import com.example.githubuserfinder.ui.follow.FollowAdapter
-import com.example.githubuserfinder.ui.follow.FollowFragment
 import com.example.githubuserfinder.ui.follow.FollowViewModel
-import com.example.githubuserfinder.ui.main.MainActivity
 
 class FavoriteFollowFragment : Fragment() {
 

@@ -15,6 +15,6 @@ class FavoriteViewModel(application: Application) : ViewModel() {
     val loading : LiveData<Boolean> = _isLoading
     val error: LiveData<Boolean> = _error
 
-    private val UserRepo : UserRepository = UserRepository(application)
-    fun getFavorite() : LiveData<List<User>> = UserRepo.getAllUsers()
+    private val userRepo : UserRepository = UserRepository(application)
+    fun getFavorite() : LiveData<List<User>> = userRepo.getAllFavorites()
 }

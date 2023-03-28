@@ -15,7 +15,6 @@ import com.example.githubuserfinder.databinding.ItemUsersBinding
 class MainAdapter(private val userList: List<UserResponse>) : ListAdapter<User, MainAdapter.ViewHolder>(DIFF_CALLBACK
     ) {
 
-
     private lateinit var onItemClickCallBack: OnItemClickCallback
 
     class ViewHolder(val binding: ItemUsersBinding) : RecyclerView.ViewHolder(binding.root)
@@ -30,7 +29,6 @@ class MainAdapter(private val userList: List<UserResponse>) : ListAdapter<User, 
 
         Glide.with(holder.itemView.context)
             .load(gitUser.avatarUrl)
-            .transition(DrawableTransitionOptions.withCrossFade())
             .centerCrop()
             .circleCrop()
             .into(holder.binding.ciAvatar)
@@ -61,7 +59,7 @@ class MainAdapter(private val userList: List<UserResponse>) : ListAdapter<User, 
                     return oldUser.login == newUser.login
                 }
 
-                @SuppressLint("DiffutilsEquals")
+                @SuppressLint("DiffUtilsEquals")
                 override fun areContentsTheSame(oldUser: User, newUser: User): Boolean {
                     return oldUser == newUser
                 }

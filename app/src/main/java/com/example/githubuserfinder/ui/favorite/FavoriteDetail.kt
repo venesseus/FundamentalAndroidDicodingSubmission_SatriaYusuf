@@ -19,11 +19,12 @@ class FavoriteDetail : AppCompatActivity() {
 
     private var _binding: ActivityDetailBinding? = null
     private val binding get() = _binding
-    private lateinit var viewModel: DetailViewModel
-    private var detailUser = UserResponse()
 
+    private var detailUser = UserResponse()
     private var ivFavorite: Boolean = false
-    private var favoriteUser: User? = null
+    private var favUser: User? = null
+
+    private lateinit var viewModel: DetailViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,50 +38,50 @@ class FavoriteDetail : AppCompatActivity() {
             viewModel.getDetailUser(user)
         }
 
+        //Binding Items (Check this if there's an error on favorite
         viewModel.listUser.observe(this) { detailList ->
             detailUser = detailList
 
-            if (detailList != null) {
-                binding?.let {
-                    Glide.with(this)
-                        .load(detailList.avatarUrl)
-                        .circleCrop()
-                        .into(it.ivDetailImage)
-                }
+            favUser = User(detailUser.id, detailUser.login, detailUser.avatarUrl)
+            binding?.let {
+                Glide.with(this)
+                    .load(detailUser.avatarUrl)
+                    .circleCrop()
+                    .into(it.ivDetailImage)
             }
             binding?.apply {
-                tvDetailName.text = detailList.name
-                tvDetailUsername.text = detailList.login
-                tvDetailFollowers.text = detailList.followers.toString()
-                tvDetailFollowing.text = detailList.following.toString()
-                tvDetailRepository.text = detailList.publicRepos.toString()
+                tvDetailName.text = detailUser.name
+                tvDetailUsername.text = detailUser.login
+                tvDetailFollowers.text = detailUser.followers.toString()
+                tvDetailFollowing.text = detailUser.following.toString()
+                tvDetailRepository.text = detailUser.publicRepos.toString()
             }
 
-            favoriteUser = User(detailList.id, detailList.login, detailList.avatarUrl)
             viewModel.getFavorite().observe(this) { userFavorite ->
                 if (userFavorite != null) {
                     for (data in userFavorite) {
-                        if (detailList.id == data.id) {
+                        if (detailUser.id == data.id) {
                             ivFavorite = true
-                            binding?.ivFavorite?.setImageResource(R.drawable.ic_draw_bookmark)
+                            binding?.ivFavorite?.setImageResource(R.drawable.ic_draw_bookmarked)
                         }
                     }
                 }
             }
 
             binding?.ivFavorite?.setOnClickListener {
-                if (ivFavorite) {
+                if (!ivFavorite) {
                     ivFavorite = true
-                    binding!!.ivFavorite.setImageResource(R.drawable.ic_draw_bookmark)
+                    binding!!.ivFavorite.setImageResource(R.drawable.ic_draw_bookmarked)
                     insertToDatabase(detailUser)
                 } else {
                     ivFavorite = false
                     binding!!.ivFavorite.setImageResource(R.drawable.ic_draw_bookmark)
                     viewModel.delete(detailUser.id)
-                    Toast.makeText(this, "Delete Favorite", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this, "Bookmark Deleted", Toast.LENGTH_SHORT).show()
                 }
             }
         }
+
 
         viewModel.loading.observe(this){
             showLoading(it)
@@ -93,12 +94,12 @@ class FavoriteDetail : AppCompatActivity() {
     }
 
         private fun insertToDatabase(gitDetailList: UserResponse) {
-            favoriteUser.let { favoriteUser ->
+            favUser.let { favoriteUser ->
                 favoriteUser?.id = gitDetailList.id
                 favoriteUser?.login = gitDetailList.login
                 favoriteUser?.imageUrl = gitDetailList.avatarUrl
                 viewModel.insert(favoriteUser as User)
-                Toast.makeText(this, "Favorited", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Bookmarked", Toast.LENGTH_SHORT).show()
             }
         }
 

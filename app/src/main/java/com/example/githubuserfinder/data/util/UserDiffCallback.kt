@@ -3,7 +3,7 @@ package com.example.githubuserfinder.data.util
 import androidx.recyclerview.widget.DiffUtil
 import com.example.githubuserfinder.data.database.User
 
-class DiffCallback(private val mOldList: List<User>, private val mNewList: List<User>) : DiffUtil.Callback() {
+class UserDiffCallback(private val mOldList: List<User>, private val mNewList: List<User>) : DiffUtil.Callback() {
     override fun getOldListSize(): Int {
         return mOldList.size
     }

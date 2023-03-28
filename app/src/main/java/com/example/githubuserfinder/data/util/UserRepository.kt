@@ -16,7 +16,7 @@ class UserRepository(application: Application) {
         val db = UserRoomDatabase.getDatabase(application)
         mUserDao = db.userDao()
     }
-    fun getAllUsers(): LiveData<List<User>> = mUserDao.getAllUser()
+    fun getAllFavorites(): LiveData<List<User>> = mUserDao.getAllUser()
 
     fun insert(user: User) {
         executorService.execute { mUserDao.insertFavorite(user) }

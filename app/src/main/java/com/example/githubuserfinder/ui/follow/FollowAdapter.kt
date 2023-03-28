@@ -21,7 +21,6 @@ class FollowAdapter(private val UserList: List<UserResponse>) : RecyclerView.Ada
         val gitUser = UserList[position]
         Glide.with(holder.itemView.context)
             .load(gitUser.avatarUrl)
-            .transition(DrawableTransitionOptions.withCrossFade())
             .centerCrop()
             .circleCrop()
             .into(holder.binding.ciAvatar)

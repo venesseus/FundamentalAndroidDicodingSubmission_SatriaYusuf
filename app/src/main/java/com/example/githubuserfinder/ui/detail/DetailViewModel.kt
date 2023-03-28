@@ -34,7 +34,7 @@ class DetailViewModel(application: Application) : ViewModel() {
     }
 
     fun getFavorite():LiveData<List<User>> =
-        mUserRepository.getAllUsers()
+        mUserRepository.getAllFavorites()
 
     fun getDetailUser(username: String) {
         _isLoading.value = true
