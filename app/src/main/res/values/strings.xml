@@ -1,0 +1,33 @@
+<resources>
+    <string name="app_name">Github User Finder</string>
+
+    <string name="tv_nama_profile">Ini nama profile</string>
+
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="tv_name">Ini nama user</string>
+    <string name="username">Ini username</string>
+    <string name="follower_number">123</string>
+    <string name="follower_text">Follower</string>
+    <string name="following_number">123</string>
+    <string name="following_text">Following</string>
+    <string name="content_tab_text">This is Tab %1$d</string>
+    <string name="repository_text">Repository</string>
+
+    <string name="tabs_text_1">Followers</string>
+    <string name="tabs_text_2">Followings</string>
+
+    <string name="search">Search</string>
+    <string name="search_hint">Find User</string>
+    <string name="welcome">Selamat Datang</string>
+
+    <string name="favorite">Favorite</string>
+    <string name="add_favorite">Add to Favorite</string>
+
+    <string name="dark_mode">Dark Mode</string>
+    <string name="setting">Setting</string>
+    <string name="light_mode">Light Mode</string>
+
+    <string name="username_text">Username</string>
+    <string name="profile_contentDesc">Profile Picture</string>
+    <string name="followers_text">Followers</string>
+</resources>
