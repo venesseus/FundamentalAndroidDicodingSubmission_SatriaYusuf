@@ -10,6 +10,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.githubuserfinder.data.model.UserResponse
 import com.example.githubuserfinder.databinding.FollowFragmentBinding
+import com.example.githubuserfinder.ui.detail.DetailActivity
 import com.example.githubuserfinder.ui.main.MainActivity
 
 class FollowFragment : Fragment() {
@@ -18,7 +19,6 @@ class FollowFragment : Fragment() {
         const val TAB_TITLES = "tab_titles"
         const val GIT_FOLLOWER = "Followers"
         const val GIT_FOLLOWING = "Following"
-        const val FAV_TABS = "fav_tabs"
     }
 
     private lateinit var binding: FollowFragmentBinding
@@ -32,22 +32,19 @@ class FollowFragment : Fragment() {
         binding = FollowFragmentBinding.inflate(inflater, container, false)
         viewModel = ViewModelProvider(this, ViewModelProvider.NewInstanceFactory()) [FollowViewModel::class.java]
 
-        val userFollow : UserResponse = requireActivity().intent.getParcelableExtra(MainActivity.EXTRA_DATA)!!
+        val userFollow : UserResponse? = requireActivity().intent.getParcelableExtra(DetailActivity.EXTRA_FAVORITE)
 
+        //Data follow ke Tab
         binding.rvFollow.layoutManager = LinearLayoutManager(activity)
         val userTab = arguments?.getString(TAB_TITLES)
         if (userTab == GIT_FOLLOWER) {
-            userFollow.login?.let { viewModel.getUserFollower(it) }
+            if (userFollow != null) {
+                userFollow.login?.let { viewModel.getUserFollower(it) }
+            }
         } else if (userTab == GIT_FOLLOWING){
-            userFollow.login?.let { viewModel.getUserFollowing(it) }
-        }
-
-        //Buat kirim data follow ke detail favorite tab
-        val favTab = arguments?.getString(FAV_TABS)
-        if (favTab == GIT_FOLLOWER) {
-            userFollow.login?.let { viewModel.getUserFollower(it) }
-        } else if (favTab == GIT_FOLLOWING){
-            userFollow.login?.let { viewModel.getUserFollowing(it) }
+            if (userFollow != null) {
+                userFollow.login?.let { viewModel.getUserFollowing(it) }
+            }
         }
 
         viewModel.loading.observe(viewLifecycleOwner){

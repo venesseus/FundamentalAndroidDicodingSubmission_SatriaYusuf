@@ -22,7 +22,6 @@ class SectionPagerAdapter(activity: AppCompatActivity): FragmentStateAdapter(act
         }
         fragment.arguments = Bundle().apply {
             putString(FollowFragment.TAB_TITLES, gitTabs)
-            putString(FollowFragment.FAV_TABS, gitTabs)
         }
         return fragment
     }
