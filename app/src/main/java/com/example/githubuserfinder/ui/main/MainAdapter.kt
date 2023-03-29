@@ -16,14 +16,11 @@ class MainAdapter(private val userList: List<UserResponse>) : ListAdapter<User, 
     ) {
 
     private lateinit var onItemClickCallBack: OnItemClickCallback
-
     class ViewHolder(val binding: ItemUsersBinding) : RecyclerView.ViewHolder(binding.root)
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val binding = ItemUsersBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return ViewHolder(binding)
     }
-
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val gitUser = userList[position]
 
@@ -47,11 +44,9 @@ class MainAdapter(private val userList: List<UserResponse>) : ListAdapter<User, 
     fun setOnItemClickCallback(onItemClickCallback: OnItemClickCallback) {
         this.onItemClickCallBack = onItemClickCallback
     }
-
     interface OnItemClickCallback {
         fun onItemClicked(data: UserResponse)
     }
-
     companion object {
         val DIFF_CALLBACK: DiffUtil.ItemCallback<User> =
             object : DiffUtil.ItemCallback<User>() {

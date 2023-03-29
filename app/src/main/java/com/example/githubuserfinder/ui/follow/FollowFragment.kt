@@ -15,9 +15,10 @@ import com.example.githubuserfinder.ui.main.MainActivity
 class FollowFragment : Fragment() {
 
     companion object {
-        const val GIT_TABS = "GIT_TABS"
+        const val TAB_TITLES = "tab_titles"
         const val GIT_FOLLOWER = "Followers"
         const val GIT_FOLLOWING = "Following"
+        const val FAV_TABS = "fav_tabs"
     }
 
     private lateinit var binding: FollowFragmentBinding
@@ -29,23 +30,31 @@ class FollowFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = FollowFragmentBinding.inflate(inflater, container, false)
-        viewModel = ViewModelProvider(this, ViewModelProvider.NewInstanceFactory())[FollowViewModel::class.java]
+        viewModel = ViewModelProvider(this, ViewModelProvider.NewInstanceFactory()) [FollowViewModel::class.java]
 
-        val git : UserResponse = requireActivity().intent.getParcelableExtra(MainActivity.EXTRA_DATA)!!
+        val userFollow : UserResponse = requireActivity().intent.getParcelableExtra(MainActivity.EXTRA_DATA)!!
+
         binding.rvFollow.layoutManager = LinearLayoutManager(activity)
-
-        val gitTab = arguments?. getString(GIT_TABS)
-        if (gitTab == GIT_FOLLOWER) {
-            git.login?.let { viewModel.getUserFollower(it)}
-        } else if (gitTab == GIT_FOLLOWING){
-            git.login?.let { viewModel.getUserFollowing(it) }
+        val userTab = arguments?.getString(TAB_TITLES)
+        if (userTab == GIT_FOLLOWER) {
+            userFollow.login?.let { viewModel.getUserFollower(it) }
+        } else if (userTab == GIT_FOLLOWING){
+            userFollow.login?.let { viewModel.getUserFollowing(it) }
         }
 
-        viewModel.loading.observe(viewLifecycleOwner) {
+        //Buat kirim data follow ke detail favorite tab
+        val favTab = arguments?.getString(FAV_TABS)
+        if (favTab == GIT_FOLLOWER) {
+            userFollow.login?.let { viewModel.getUserFollower(it) }
+        } else if (favTab == GIT_FOLLOWING){
+            userFollow.login?.let { viewModel.getUserFollowing(it) }
+        }
+
+        viewModel.loading.observe(viewLifecycleOwner){
             showLoading(it)
         }
 
-        viewModel.listFollow.observe(viewLifecycleOwner) {
+        viewModel.listFollow.observe(viewLifecycleOwner){
             val adapter = FollowAdapter(it)
             binding.apply {
                 rvFollow.adapter = adapter
@@ -59,7 +68,7 @@ class FollowFragment : Fragment() {
         return binding.root
     }
 
-    private fun showLoading(isLoading: Boolean) {
+    private fun showLoading(isLoading : Boolean) {
         if (isLoading) {
             binding.loadingFollow.visibility = View.VISIBLE
         } else {

@@ -7,6 +7,7 @@ import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.example.githubuserfinder.ui.follow.FollowFragment
 
 class SectionPagerAdapter(activity: AppCompatActivity): FragmentStateAdapter(activity) {
+
     override fun getItemCount(): Int {
         return 2
     }
@@ -20,7 +21,8 @@ class SectionPagerAdapter(activity: AppCompatActivity): FragmentStateAdapter(act
             else -> ""
         }
         fragment.arguments = Bundle().apply {
-            putString(FollowFragment.GIT_TABS, gitTabs)
+            putString(FollowFragment.TAB_TITLES, gitTabs)
+            putString(FollowFragment.FAV_TABS, gitTabs)
         }
         return fragment
     }

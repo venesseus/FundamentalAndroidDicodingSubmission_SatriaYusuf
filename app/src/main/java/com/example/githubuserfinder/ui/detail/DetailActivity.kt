@@ -71,7 +71,7 @@ class DetailActivity : AppCompatActivity() {
                 }
             }
             binding?.ivFavorite?.setOnClickListener{
-                if(ivFavorite){
+                if(!ivFavorite){
                     ivFavorite = true
                     binding!!.ivFavorite.setImageResource(R.drawable.ic_draw_bookmarked)
                     insertToDatabase(detailUser)

@@ -6,6 +6,7 @@ import android.widget.Toast
 import androidx.annotation.StringRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
+import androidx.viewpager2.widget.ViewPager2
 import com.bumptech.glide.Glide
 import com.example.githubuserfinder.R
 import com.example.githubuserfinder.data.database.User
@@ -14,6 +15,9 @@ import com.example.githubuserfinder.databinding.ActivityDetailBinding
 import com.example.githubuserfinder.ui.detail.DetailActivity
 import com.example.githubuserfinder.ui.detail.DetailViewModel
 import com.example.githubuserfinder.ui.detail.DetailViewModelFactory
+import com.example.githubuserfinder.ui.detail.SectionPagerAdapter
+import com.google.android.material.tabs.TabLayout
+import com.google.android.material.tabs.TabLayoutMediator
 
 class FavoriteDetail : AppCompatActivity() {
 
@@ -82,6 +86,14 @@ class FavoriteDetail : AppCompatActivity() {
             }
         }
 
+        //Tab untuk favorite
+        val sectionPagerAdapter = SectionPagerAdapter(this)
+        val viewPager: ViewPager2 = findViewById(R.id.view_pager)
+        viewPager.adapter = sectionPagerAdapter
+        val tabs: TabLayout = findViewById(R.id.tabs)
+        TabLayoutMediator(tabs, viewPager) { detailTabs, position ->
+            detailTabs.text = resources.getString(DetailActivity.GIT_TABS[position])
+        }.attach()
 
         viewModel.loading.observe(this){
             showLoading(it)

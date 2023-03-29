@@ -54,10 +54,10 @@ class MainActivity : AppCompatActivity() {
         rvList = binding.rvProfileName
         rvList.setHasFixedSize(true)
 
-        val pref = SettingPreference.getInstance(dataStore)
+        val setPref = SettingPreference.getInstance(dataStore)
 
         val themeSettingView =
-            ViewModelProvider(this, ViewModelFactory(pref)).get(ThemeSettingViewModel::class.java)
+            ViewModelProvider(this, ViewModelFactory(setPref)).get(ThemeSettingViewModel::class.java)
 
         themeSettingView.getThemeSettings().observe(this) {isDarkModeActive: Boolean ->
             if (isDarkModeActive) {

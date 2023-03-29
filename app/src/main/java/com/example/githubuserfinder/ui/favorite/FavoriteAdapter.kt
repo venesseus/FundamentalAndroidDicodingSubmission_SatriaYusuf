@@ -50,7 +50,7 @@ class FavoriteAdapter : ListAdapter<User, FavoriteAdapter.FavoriteViewHolder>(DI
                 .load(userFav.imageUrl)
                 .centerCrop()
                 .circleCrop()
-                .into(binding.ciAvatar) //Coba cek apa butuh layout item_row tambahan atau engga
+                .into(binding.ciAvatar)
         }
     }
     override fun getItemCount(): Int = userFavorite.size
