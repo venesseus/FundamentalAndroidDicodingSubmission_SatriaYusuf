@@ -38,13 +38,9 @@ class FollowFragment : Fragment() {
         binding.rvFollow.layoutManager = LinearLayoutManager(activity)
         val userTab = arguments?.getString(TAB_TITLES)
         if (userTab == GIT_FOLLOWER) {
-            if (userFollow != null) {
-                userFollow.login?.let { viewModel.getUserFollower(it) }
-            }
-        } else if (userTab == GIT_FOLLOWING){
-            if (userFollow != null) {
-                userFollow.login?.let { viewModel.getUserFollowing(it) }
-            }
+            userFollow!!.login?.let { viewModel.getUserFollower(it) }
+        } else if (userTab == GIT_FOLLOWING) {
+            userFollow!!.login?.let { viewModel.getUserFollowing(it) }
         }
 
         viewModel.loading.observe(viewLifecycleOwner){
