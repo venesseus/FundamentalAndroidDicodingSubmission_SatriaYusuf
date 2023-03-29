@@ -8,7 +8,6 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.githubuserfinder.data.model.UserResponse
 import com.example.githubuserfinder.databinding.FollowFragmentBinding
 import com.example.githubuserfinder.ui.detail.DetailActivity
 import com.example.githubuserfinder.ui.main.MainActivity
@@ -32,15 +31,15 @@ class FollowFragment : Fragment() {
         binding = FollowFragmentBinding.inflate(inflater, container, false)
         viewModel = ViewModelProvider(this, ViewModelProvider.NewInstanceFactory()) [FollowViewModel::class.java]
 
-        val userFollow : UserResponse? = requireActivity().intent.getParcelableExtra(DetailActivity.EXTRA_FAVORITE)
+        val userFollow  = requireActivity().intent.getStringExtra(DetailActivity.EXTRA_FAVORITE)
 
         //Data follow ke Tab
         binding.rvFollow.layoutManager = LinearLayoutManager(activity)
         val userTab = arguments?.getString(TAB_TITLES)
         if (userTab == GIT_FOLLOWER) {
-            userFollow!!.login?.let { viewModel.getUserFollower(it) }
+            userFollow?.let { viewModel.getUserFollower(it) }
         } else if (userTab == GIT_FOLLOWING) {
-            userFollow!!.login?.let { viewModel.getUserFollowing(it) }
+            userFollow?.let { viewModel.getUserFollowing(it) }
         }
 
         viewModel.loading.observe(viewLifecycleOwner){
