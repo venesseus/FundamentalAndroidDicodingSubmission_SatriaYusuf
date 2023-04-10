@@ -33,11 +33,11 @@ class DetailActivity : AppCompatActivity() {
         setContentView(binding?.root)
 
         viewModel = obtainViewModel(this@DetailActivity)
-        val user = intent.getParcelableExtra<UserResponse>(MainActivity.EXTRA_DATA)
+        val user = intent.getStringExtra(MainActivity.EXTRA_DATA)
         println("Print (${MainActivity.EXTRA_DATA}")
 
         if (user != null) {
-            user.login?.let { viewModel.getDetailUser(it) }
+            user.let { viewModel.getDetailUser(it) }
         }
 
         viewModel.listUser.observe(this) { detailList ->
@@ -51,6 +51,7 @@ class DetailActivity : AppCompatActivity() {
                         .into(it.ivDetailImage)
                 }
             }
+
             binding?.apply {
                 tvDetailName.text = detailList.name
                 tvDetailUsername.text = detailList.login

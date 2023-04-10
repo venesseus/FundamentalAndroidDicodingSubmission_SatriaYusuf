@@ -32,6 +32,7 @@ class ThemeSettingActivity : AppCompatActivity() {
             ThemeSettingViewModel::class.java
         )
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
+
         themeViewModel.getThemeSettings().observe(this) { isDarkModeActive: Boolean ->
             if (isDarkModeActive) {
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)

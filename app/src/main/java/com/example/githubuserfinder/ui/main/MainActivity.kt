@@ -76,7 +76,7 @@ class MainActivity : AppCompatActivity() {
         searchUserAdapter.setOnItemClickCallback(object : MainAdapter.OnItemClickCallback{
             override fun onItemClicked(data: UserResponse) {
                 val intentDetail = Intent(this@MainActivity, DetailActivity::class.java)
-                intentDetail.putExtra(EXTRA_DATA, data)
+                intentDetail.putExtra(EXTRA_DATA, data.login)
                 startActivity(intentDetail)
             }
         })
